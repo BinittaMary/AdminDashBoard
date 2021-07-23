@@ -12,7 +12,6 @@ const CourseSchema = new Schema({
     course_title            : String,
     course_image            : String,
     course_short_desc       : String,
-    course_long_Desc        : String,
     Reg_Status              : Number,
     Category                : String,
     Rating                  : Number,
@@ -26,7 +25,6 @@ const CourseSchema = new Schema({
     internship_partner      : String,
     knowledge_partner       : String,
     sponser_partner         : String,
-    dates                   : String,
     index                   : Number,
     active                  : Boolean 
 });    

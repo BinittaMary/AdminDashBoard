@@ -22,3 +22,4 @@ const TestimonialSchema = new Schema({
 var Testimonialdata = mongoose.model('testimonial',TestimonialSchema);
 
 module.exports = Testimonialdata;
+

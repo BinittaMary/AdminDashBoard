@@ -1,10 +1,13 @@
 const express = require('express');
 const cors = require('cors');
+const multer = require('multer');
+const path= require('path');
 const bodyparser = require('body-parser');
 const jwt= require('jsonwebtoken')
 const Coursedata = require('./src/modal/CourseData');
 const CourseRegistrationdata = require('./src/modal/CourseRegistrationData');
 const Testimonialdata = require('./src/modal/TestimonialData');
+const StaffData = require('./src/modal/Staffdata');
 
 
 const app = new express();
@@ -39,9 +42,10 @@ app.get('/CourseList',function(req,res){
 
 app.get('/Course/:id',  (req, res) => {  
     const id = req.params.id;
+    console.log(`retrieve course id ${id}`)
     Coursedata.findOne({"_id":id})
       .then((course)=>{
-        console.log(` retrieved author ${course.course_title}`);
+        console.log(` retrieve course ${course.course_title}`);
           res.send(course);
       });
   })
@@ -118,7 +122,217 @@ app.post('/registercourse',function(req,res){
 
   });
 
+  app.post('/Course/insert',verifyToken,function(req,res){
+    var indx;  
+    res.header("Access-Control-Allow-Origin","*")
+    res.header('Access-Control-Allow-Methods: GET, POST, PATCH,PUT,DELETE,OPTIONS');  
+    console.log(` inside insert ${req.body}`)
+    console.log(__dirname);
+    const destn = path.join(__dirname, '../', 'Client', 'src', 'assets', 'images');
+    console.log(destn);
+    var storage =   multer.diskStorage({
+        destination: function (req, file, callback) {
+          callback(null, destn);
+        },
+        filename: function(req, file, cb) {
+          cb(null, file.originalname);
+      }
+      });
+    var upload = multer({ storage : storage}).array('files',10);
+    upload(req,res,function(err) {
+        if(err) {
+            console.log("Error uploading file.");
+        }
+        console.log("File is uploaded");
+        console.log(`the title is ${req.body.course_title}`);
+        Coursedata.findOne().sort('-index').exec(function(err, course) {
+            indx=course.index;
+            indx=indx+1;
+            console.log(`next index ${indx}`);
+            var course = {      
+                course_title            : req.body.course_title,
+                course_image            : req.body.course_image,
+                course_short_desc       : req.body.course_short_desc,
+                Reg_Status              : req.body.Reg_Status,
+                Category                : req.body.Category,
+                Rating                  : req.body.Rating,
+                about_course            : req.body.about_course,
+                dates                   : req.body.dates,
+                eligibility             : req.body.eligibility,
+                course_fee              : req.body.course_fee,
+                entrance_details        : req.body.entrance_details,
+                refund_policy           : req.body.refund_policy,
+                course_delivery         : req.body.course_delivery,
+                internship_partner      : req.body.internship_partner,
+                knowledge_partner       : req.body.knowledge_partner,
+                sponser_partner         : req.body.sponser_partner,
+                index                   : indx,
+                active                  : req.body.active  
+        }       
+        console.log(course);
+        var courseItem = new Coursedata(course);
+        courseItem.save();
+        });    
+    });
+  });
 
+  app.post('/Course/remove',verifyToken,(req,res)=>{  
+    console.log(req.body);
+    id         = req.body._id
+    console.log(` inside remove ${id}`);
+    Coursedata.deleteOne({'_id' : id})
+    .then(function(course){
+        console.log('success')
+        res.send();
+    });
+  
+  });
+
+
+  app.put('/Course/update',verifyToken,(req,res)=>{
+    res.header("Access-Control-Allow-Origin","*")
+    res.header('Access-Control-Allow-Methods: GET, POST, PATCH,PUT,DELETE,OPTIONS');  
+    console.log(` inside update ${req.body.id}`);
+    id                      = req.body._id;
+    course_title            = req.body.course_title;
+    course_image            = req.body.course_image;
+    course_short_desc       = req.body.course_short_desc;
+    Reg_Status              = req.body.Reg_Status;
+    Category                = req.body.Category;
+    Rating                  = req.body.Rating;
+    about_course            = req.body.about_course;
+    dates                   = req.body.dates;
+    eligibility             = req.body.eligibility;
+    course_fee              = req.body.course_fee;
+    entrance_details        = req.body.entrance_details;
+    refund_policy           = req.body.refund_policy;
+    course_delivery         = req.body.course_delivery;
+    internship_partner      = req.body.internship_partner;
+    knowledge_partner       = req.body.knowledge_partner;
+    sponser_partner         = req.body.sponser_partner;
+    active                  = req.body.active;  
+    Authordata.findByIdAndUpdate({"_id":id},
+                                {$set:{"authorname":authorname,
+                                "nationality":nationality,
+                                "works":works,
+                                "career":career,
+                                "image":image}})
+   .then(function(){
+       res.send();
+   })
+
+  });
+
+app.put('/author/updateWithFile',verifyToken,(req,res)=>{
+
+
+   res.header("Access-Control-Allow-Origin","*")
+   res.header('Access-Control-Allow-Methods: GET, POST, PATCH,PUT,DELETE,OPTIONS');  
+   console.log(` inside updateWithFile ${req.body}`)
+   const destn = path.join(__dirname, '../',  'Client', 'src', 'assets', 'images');
+   console.log(destn);
+   var storage =   multer.diskStorage({
+       destination: function (req, file, callback) {
+         callback(null, destn);
+       },
+       filename: function(req, file, cb) {
+         cb(null, file.originalname);
+     }
+     });
+   var upload = multer({ storage : storage}).single('file');
+   upload(req,res,function(err) {
+ 
+       if(err) {
+           console.log("Error uploading file.");
+       }
+       console.log("File is uploaded");
+       console.log(`the title is ${req.body.title}`);
+   console.log(` inside update with image ${req.body.title}`);
+   id          = req.body._id,
+   authorname  = req.body.authorname,
+   nationality = req.body.nationality,
+   works       = req.body.works,
+   career      = req.body.career,
+   image       = req.body.image
+   Authordata.findByIdAndUpdate({"_id":id},
+                               {$set:{"authorname":authorname,
+                               "nationality":nationality,
+                               "works":works,
+                               "career":career,
+                               "image":image}})
+  .then(function(){
+      res.send();
+  })
+ });
+ });
+
+ app.post('/insert',function(req,res){
+   
+  console.log(req.body);
+ 
+  var testimonial = {       
+      testimonialId : req.body.testimonialId.testimonialId,
+      testimonialName : req.body.testimonial.testimonialName,
+      testimonialPosition : req.body.testimonial.testimonialPosition,
+      testimonial:req.body.testimonial,
+      imageUrl : req.body.testimonial.imageUrl,
+ }       
+ var testimonial = new TestimonialData(testimonial);
+ testimonial.save();
+});
+
+
+
+app.get('/testimonials',function(req,res){
+  
+  Testimonialdata.find()
+              .then(function(testimonials){
+                  res.send(testimonials);
+              });
+});
+
+app.post('/insert',function(req,res){
+
+  const destn = path.join(__dirname, '../',  'Admin-Dashboard-master', 'src', 'assets', 'images');
+  console.log(destn);
+  var storage =   multer.diskStorage({
+      destination: function (req, file, callback) {
+        callback(null, destn);
+      },
+      filename: function(req, file, cb) {
+        cb(null, file.originalname);
+    }
+    });
+  var upload = multer({ storage : storage}).single('file');
+
+  upload(req,res,function(err) {
+      if(err) {
+          console.log("Error uploading file.");
+      }
+ 
+  console.log(req.body);
+ 
+  var staff = {       
+     name:req.body.name,
+     designation:req.body.designation,
+     email:req.body.email,
+     image:req.body.image
+ }       
+ var staff = new StaffData(staff);
+ staff.save();
+ 
+ });
+
+});
+
+//getting staff data
+app.get('/staffs',function(req,res){
+  
+  StaffData.find()
+              .then(function(staffs){
+                  res.send(staffs);
+              });
+});
 
 app.listen(5000, function(){
     console.log('listening to port 5000');
