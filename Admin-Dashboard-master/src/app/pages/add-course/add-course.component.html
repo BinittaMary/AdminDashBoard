@@ -1,25 +1,25 @@
 <div class="row">
   <div class="col-lg-12">
     <nb-card>
-      <nb-card-header>View Course</nb-card-header>
+      <nb-card-header>Add Course</nb-card-header>
       <nb-card-body>
-        <form novalidate #RegisterForm="ngForm">
+        <form novalidate novalidate #AddCourseForm="ngForm" (ngSubmit)="AddCourseForm.form.valid && AddCourse()">
           <div class="form-group row">
             <label for="inputEmail1" class="label col-lg-2 col-form-label">Course Title</label>
             <div class="col-lg-10">
-              <input type="text" class="form-control" #title='ngModel'   name="name1" [(ngModel)]="course.course_title" disabled id="exampleFormControlInput1" placeholder="">
+              <input type="text" class="form-control" #title='ngModel'   name="name1" [(ngModel)]="course.course_title"  id="exampleFormControlInput1" placeholder="">
             </div>
           </div>
           <div class="form-group row">
             <label class="col-lg-2 label">Short Description</label>
             <div class="col-lg-10">
-              <ckeditor [config]="{ extraPlugins: 'divarea', height: '100' }" disabled #shortDesc='ngModel'   name="shortDesc" [(ngModel)]="course.course_short_desc" readonly></ckeditor>
+            <ckeditor [config]="{ extraPlugins: 'divarea', height: '100' }"  #shortDesc='ngModel'   name="shortDesc" [(ngModel)]="course.course_short_desc" ></ckeditor>  
             </div>
           </div>
           <div class="form-group row">
             <label for="inputEmail1" class="label col-lg-2 col-form-label">Registration Status</label>
             <div class="col-lg-10">
-              <select class="form-select " #Reg_Status='ngModel'   name="Reg_Status" [(ngModel)]="course.Reg_Status"  disabled readonly aria-label="Default select example" style="width:100%; height:2em"> 
+              <select class="form-select " #Reg_Status='ngModel'   name="Reg_Status" [(ngModel)]="course.Reg_Status"    aria-label="Default select example" style="width:100%; height:2em"> 
                 <option selected>Choose from the list</option>
                 <option value="0">Registration Closed</option>
                 <option value="1">Registration Open</option>
@@ -30,13 +30,13 @@
           <div class="form-group row">
             <label for="inputEmail1"  class="label col-lg-2 col-form-label">Rating</label>
             <div class="col-lg-10">
-              <input type="text" class="form-control" #Rating='ngModel'   name="Rating" [(ngModel)]="course.Rating"  disabled  id="exampleFormControlInput1" placeholder="Rating between 1-5">
+              <input type="text" class="form-control" #Rating='ngModel'   name="Rating" [(ngModel)]="course.Rating"    id="exampleFormControlInput1" placeholder="Rating between 1-5">
             </div>
           </div>
           <div class="form-group row">
             <label for="inputEmail1" class="label col-lg-2 col-form-label">Course Category</label>
             <div class="col-lg-10">
-              <select class="form-select " #Category='ngModel'   name="Category" [(ngModel)]="course.Category"  disabled readonly aria-label="Default select example" style="width:100%; height:2em"> 
+              <select class="form-select " #Category='ngModel'   name="Category" [(ngModel)]="course.Category"    aria-label="Default select example" style="width:100%; height:2em"> 
                 <option selected>Choose from the list</option>
                 <option value="Retail">Retail</option>
                 <option value="Institutional">Institutional</option>
@@ -47,64 +47,71 @@
           <div class="form-group row">
             <label class="col-lg-2 label">About Course</label>
             <div class="col-lg-10">
-              <ckeditor [config]="{ extraPlugins: 'divarea', height: '100' }" #about_course='ngModel'   name="about_course" [(ngModel)]="course.about_course"  disabled readonly></ckeditor>
-            </div>
+              <ckeditor [config]="{ extraPlugins: 'divarea', height: '100' }" #about_course='ngModel'   name="about_course" [(ngModel)]="course.about_course"  ></ckeditor>
+            </div>                                                   
           </div>
           <div class="form-group row">
             <label class="col-lg-2 label">Course Eligibility</label>
             <div class="col-lg-10">
-              <ckeditor [config]="{ extraPlugins: 'divarea', height: '100' }"  #eligibility='ngModel'   name="eligibility" [(ngModel)]="course.eligibility"  disabled readonly></ckeditor>
+              <ckeditor [config]="{ extraPlugins: 'divarea', height: '100' }"  #eligibility='ngModel'   name="eligibility" [(ngModel)]="course.eligibility" ></ckeditor>
             </div>
           </div>
           <div class="form-group row">
             <label class="col-lg-2 label">Course Fee</label>
             <div class="col-lg-10">
-              <ckeditor [config]="{ extraPlugins: 'divarea', height: '100' }"  #course_fee='ngModel'   name="course_fee" [(ngModel)]="course.course_fee"  disabled readonly></ckeditor>
+              <ckeditor [config]="{ extraPlugins: 'divarea', height: '100' }"  #course_fee='ngModel'   name="course_fee" [(ngModel)]="course.course_fee"   ></ckeditor>
             </div>
           </div>
           <div class="form-group row">
             <label class="col-lg-2 label">Entrance Exam Details</label>
             <div class="col-lg-10">
-              <ckeditor [config]="{ extraPlugins: 'divarea', height: '100' }" #entrance_details='ngModel'   name="entrance_details" [(ngModel)]="course.entrance_details"  disabled readonly></ckeditor>
+              <ckeditor [config]="{ extraPlugins: 'divarea', height: '100' }" #entrance_details='ngModel'   name="entrance_details" [(ngModel)]="course.entrance_details"   ></ckeditor>
             </div>
           </div>
           <div class="form-group row">
             <label class="col-lg-2 label">Refund Policy</label>
             <div class="col-lg-10">
-              <ckeditor [config]="{ extraPlugins: 'divarea', height: '100' }" #refund_policy='ngModel'   name="refund_policy" [(ngModel)]="course.refund_policy"  disabled readonly></ckeditor>
+              <ckeditor [config]="{ extraPlugins: 'divarea', height: '100' }" #refund_policy='ngModel'   name="refund_policy" [(ngModel)]="course.refund_policy"   ></ckeditor>
             </div>
           </div>
           <div class="form-group row">
             <label class="col-lg-2 label">Important Dates</label>
             <div class="col-lg-10">
-              <ckeditor [config]="{ extraPlugins: 'divarea', height: '100' }"#dates='ngModel'   name="dates" [(ngModel)]="course.dates"  disabled readonly></ckeditor>
+              <ckeditor [config]="{ extraPlugins: 'divarea', height: '100' }"#dates='ngModel'   name="dates" [(ngModel)]="course.dates"   ></ckeditor>
             </div>
           </div>
           <div class=" row">
+            <label class="col-lg-2 label">Course Image</label>
+            <div class="col-lg-10">
+              <input class="form-control form-control-sm " #course_image='ngModel' (change)="selectImage($event)"  name="course_image" [(ngModel)]="course.course_image" id="formFileSm" type="file" style="height:2.5rem">
+            </div>
+          </div>
+          <br>
+          <div class=" row">
             <label class="col-lg-2 label">Course Delivery</label>
             <div class="col-lg-10">
-              <input type="text" class="form-control" #course_delivery='ngModel'   name="course_delivery" [(ngModel)]="course.course_delivery" disabled readonly id="exampleFormControlInput1" placeholder="">
+              <input class="form-control form-control-sm " #course_delivery='ngModel' (change)="selectImage($event)"  name="course_delivery" [(ngModel)]="course.course_delivery" id="formFileSm" type="file" style="height:2.5rem">
             </div>
           </div>
           <br>
           <div class=" row">
             <label class="col-lg-2 label">Internship Partner</label>
             <div class="col-lg-10">
-              <input type="text" class="form-control" #internship_partner='ngModel'   name="internship_partner" [(ngModel)]="course.internship_partner" disabled readonly id="exampleFormControlInput1" placeholder="">
+              <input class="form-control form-control-sm" #internship_partner='ngModel' (change)="selectImage($event)"  name="internship_partner" [(ngModel)]="course.internship_partner" id="formFileSm" type="file" style="height:2.5rem">
             </div>
           </div>
           <br>
           <div class=" row">
             <label class="col-lg-2 label">Knowledge Partner</label>
             <div class="col-lg-10">
-              <input type="text" class="form-control" #knowledge_partner='ngModel'   name="knowledge_partner" [(ngModel)]="course.knowledge_partner" disabled readonly id="exampleFormControlInput1" placeholder="">
+              <input class="form-control form-control-sm" #knowledge_partner='ngModel' (change)="selectImage($event)"  name="knowledge_partner" [(ngModel)]="course.knowledge_partner" id="formFileSm" type="file" style="height:2.5rem">
             </div>
           </div>        
           <br>  
           <div class=" row">
             <label class="col-lg-2 label">Sponsour Partner</label>
             <div class="col-lg-10">
-              <input type="text" class="form-control" #sponser_partner='ngModel'   name="sponser_partner" [(ngModel)]="course.sponser_partner" disabled readonly id="exampleFormControlInput1" placeholder="">
+              <input class="form-control form-control-sm" #sponser_partner='ngModel' (change)="selectImage($event)"  name="sponser_partner" [(ngModel)]="course.sponser_partner"  id="formFileSm" type="file" style="height:2.5rem">
             </div>
           </div>
           <br>
@@ -112,8 +119,7 @@
             <div class="col-lg-2"></div>
             <div class="col-lg-10" >
               <div class="form-check" readonly >
-                <input *ngIf= '(course.active)' class="form-check-input" type="checkbox" id="flexCheckDefault" checked disabled>
-                <input *ngIf= '!(course.active)' class="form-check-input" type="checkbox" id="flexCheckDefault" disabled>
+                <input  class="form-check-input" type="checkbox" id="flexCheckDefault" checked >
                 <label class="form-check-label" for="flexCheckDefault">
                   Active
                 </label>
@@ -123,8 +129,8 @@
           <div class="form-group row">
             <div class="col-lg-6"></div>
             <div class="col-lg-6">
-              <button type="button" class="btn btn-secondary btn-lg" (click)='closeForm()'>Close</button>
-              <!-- <a id="cancel" name="cancel" class="btn btn-secondary ">Close</a> -->
+              <button type="button" class="btn btn-secondary btn-lg" (click)='closeForm()'>Close</button>&nbsp;
+              <button type="button" class="btn btn-secondary btn-lg" (click)='AddCourse()'>Add Course</button>
             </div>
           </div>
         </form>

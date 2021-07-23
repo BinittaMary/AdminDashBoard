@@ -1,1 +1,53 @@
-<p>testimonials works!</p>
+<div class="lists row">
+    <div class="col-md-12 col-lg-12 col-xxxl-6 ">  
+   
+   
+   <nb-card class="list-card">
+    <nb-card-header> <h5>Testimonials</h5> 
+        <a (click)="addTestimonial()"class="plus">
+            <ion-icon name="add-outline"></ion-icon>
+        </a>   
+        <a (click)="saveTestimonialsIndex()"class="plus">
+            <ion-icon name="checkmark"></ion-icon>
+        </a>
+        <a (click)="resetTestimonialsIndex()"class="plus">
+            <ion-icon name="close"></ion-icon>
+        </a>           
+    </nb-card-header>
+       <nb-card-body>
+           <nb-list>
+               <nb-list-item>
+                   <h6 style="width:16rem">#</h6>
+                   <h6 style="width:25rem">Name</h6>
+                   <h6 style="width:30rem">Position</h6>
+                   <h6 style="width:45rem">Course</h6>
+       
+               </nb-list-item>
+       
+           </nb-list>
+           <nb-list cdkDropList (cdkDropListDropped)="onDrop($event)"> 
+           <nb-list-item class="anchor" *ngFor="let testimonial of testimonials; let i=index;" cdkDrag>
+               <h7 style='width: 16rem'> {{i+1}}</h7>
+               <h7 style='width: 30rem'> {{testimonial.name}}</h7>
+               <h7 style='width: 35rem'> {{testimonial.position}}</h7>
+               <h7 style='width: 50rem'> {{testimonial.course_title}}</h7>
+               <div>
+                <a (click)="viewTestimonial(testimonial)">
+                    <ion-icon name="eye-outline"></ion-icon>
+                </a>
+                <a (click)="editTestimonial(testimonial)">
+                    <ion-icon name="create-outline"></ion-icon>
+                </a>
+                <a (click)="deleteTestimonial(testimonial)">
+                    <ion-icon name="trash-outline"></ion-icon>
+                </a>
+            </div>
+   
+           </nb-list-item>
+           </nb-list>
+       </nb-card-body>
+   
+   </nb-card>
+   </div>
+   </div>
+

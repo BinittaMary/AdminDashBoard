@@ -1,0 +1,32 @@
+<div style="width:60rem;">
+    <div class="container col-md-8">
+    <h1 class="txt-center">Add Testimonial</h1>
+    <form action="" (ngSubmit)="addTestimonial()"  >
+    
+      <label for="">Name </label>
+    <input class="form-control" type="text" name="name" id="name" [(ngModel)]="testimonialDetails.name" placeholder="Name">
+    
+    <label for="">Position </label>
+    <input class="form-control" type="text" name="position" id="position" [(ngModel)]="testimonialDetails.position" placeholder="Position">
+    
+    <label for="">Organization</label>
+    <input class="form-control" type="text"name="organization" id="organization" [(ngModel)]="testimonialDetails.organization" placeholder="Organization">
+    
+    <label for="">Testimonial </label>
+    <input class="form-control" type="text" name="testimonial" id="testimonial" [(ngModel)]="testimonialDetails.testimonial" placeholder="Testimonial">
+    
+    <label for="">Course_Title</label>
+    <input class="form-control" type="text"name="course_title" id="course_Title" [(ngModel)]="testimonialDetails.course_title" placeholder="course">
+    
+    <label for="">Image</label>
+    <input class="form-control" type="text"name="image" id="image" [(ngModel)]="testimonialDetails.image" placeholder="Image">
+    
+    <br>
+    <div class="d-flex justify-content-center">
+    <button class="btn btn-outline-primary text-center addtestimonial">ADD</button>
+    
+    </div>
+    </form>
+    </div>
+    
+    </div>

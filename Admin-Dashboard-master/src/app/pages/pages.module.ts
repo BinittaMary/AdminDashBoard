@@ -14,6 +14,11 @@ import { StaffFormComponent } from './staff-form/staff-form.component';
 import { UsersComponent } from './users/users.component';
 import { TestimonialsComponent } from './testimonials/testimonials.component';
 import { CKEditorModule } from 'ng2-ckeditor';
+import { FormsModule } from '@angular/forms';
+import { AddCourseComponent } from './add-course/add-course.component';
+import { DeleteCourseComponent } from './delete-course/delete-course.component';
+import { EditCourseComponent } from './edit-course/edit-course.component';
+import { TestimonialformComponent } from './testimonialform/testimonialform.component';
 
 @NgModule({
   imports: [
@@ -24,7 +29,8 @@ import { CKEditorModule } from 'ng2-ckeditor';
     NbCardModule,
     DragDropModule,
     NbWindowModule,
-    CKEditorModule
+    CKEditorModule,
+    FormsModule
   ],
   declarations: [
     PagesComponent,
@@ -35,6 +41,10 @@ import { CKEditorModule } from 'ng2-ckeditor';
     StaffFormComponent,
     UsersComponent,
     TestimonialsComponent,
+    AddCourseComponent,
+    DeleteCourseComponent,
+    EditCourseComponent,
+    TestimonialformComponent,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

@@ -1,1 +1,44 @@
-<p>staffs works!</p>
+
+<div class="lists row">
+    <div class="col-md-12 col-lg-12 col-xxxl-6">
+        <nb-card class="list-card">
+            <nb-card-header> <h5>Staffs</h5> 
+                <a (click)="addStaff()"class="plus">
+                    <ion-icon name="add-outline"></ion-icon>
+                </a>   
+                <a class="plus">
+                    <ion-icon name="checkmark"></ion-icon>
+                </a>
+                <a class="plus">
+                    <ion-icon name="close"></ion-icon>
+                </a>           
+            </nb-card-header>
+            <nb-card-body>
+                <nb-list>
+                    <nb-list-item>
+                        <h6 style ='width:16rem'>#</h6>
+                        <h6 style ='width:25rem'>Name</h6> 
+                        <h6 style ='width:5rem'>Designation</h6> 
+                    </nb-list-item>    
+                </nb-list>
+                <nb-list cdkDropList (cdkDropListDropped)="onDrop($event)">
+                    <nb-list-item class="anchor" *ngFor="let staff of staffs; let i=index; " cdkDrag>
+                        <h7 style ='width:3rem'>{{i+1}}</h7>
+                        <h7 style ='width:7rem'>{{staff.name}}</h7>
+                        <h7 class="text-center" style ='width:20rem'>{{staff.designation}}</h7> 
+                        <div>
+                            <a (click)="viewCourse(Course)">
+                                <ion-icon name="eye-outline"></ion-icon>
+                            </a>
+                            <a (click)="editCourse(Course)">
+                                <ion-icon name="create-outline"></ion-icon>
+                            </a>
+                            <a (click)="deleteCourse(Course)">
+                                <ion-icon name="trash-outline"></ion-icon>
+                            </a>
+                        </div>
+                    </nb-list-item>
+                </nb-list>
+            </nb-card-body>
+        </nb-card>
+    </div>
