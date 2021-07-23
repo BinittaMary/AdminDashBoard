@@ -13,7 +13,7 @@
           <div class="form-group row">
             <label class="col-lg-2 label">Short Description</label>
             <div class="col-lg-10">
-              <ckeditor [config]="{ extraPlugins: 'divarea', height: '100' }" disabled #shortDesc='ngModel'   name="shortDesc" [(ngModel)]="course.course_short_desc" readonly></ckeditor>
+              <textarea rows="3" class='width-100' #shortDesc='ngModel'   name="shortDesc" [(ngModel)]="course.course_short_desc" readonly></textarea>
             </div>
           </div>
           <div class="form-group row">
@@ -47,64 +47,64 @@
           <div class="form-group row">
             <label class="col-lg-2 label">About Course</label>
             <div class="col-lg-10">
-              <ckeditor [config]="{ extraPlugins: 'divarea', height: '100' }" #about_course='ngModel'   name="about_course" [(ngModel)]="course.about_course"  disabled readonly></ckeditor>
+              <textarea rows="3" class='width-100' #about_course='ngModel'   name="about_course" [(ngModel)]="course.about_course"   readonly></textarea>
             </div>
           </div>
           <div class="form-group row">
             <label class="col-lg-2 label">Course Eligibility</label>
             <div class="col-lg-10">
-              <ckeditor [config]="{ extraPlugins: 'divarea', height: '100' }"  #eligibility='ngModel'   name="eligibility" [(ngModel)]="course.eligibility"  disabled readonly></ckeditor>
+              <textarea rows="3" class='width-100' #eligibility='ngModel'   name="eligibility" [(ngModel)]="course.eligibility"  disabled readonly></textarea>
             </div>
           </div>
           <div class="form-group row">
             <label class="col-lg-2 label">Course Fee</label>
             <div class="col-lg-10">
-              <ckeditor [config]="{ extraPlugins: 'divarea', height: '100' }"  #course_fee='ngModel'   name="course_fee" [(ngModel)]="course.course_fee"  disabled readonly></ckeditor>
+              <textarea rows="3" class='width-100'  #course_fee='ngModel'   name="course_fee" [(ngModel)]="course.course_fee"  disabled readonly></textarea>
             </div>
           </div>
           <div class="form-group row">
             <label class="col-lg-2 label">Entrance Exam Details</label>
             <div class="col-lg-10">
-              <ckeditor [config]="{ extraPlugins: 'divarea', height: '100' }" #entrance_details='ngModel'   name="entrance_details" [(ngModel)]="course.entrance_details"  disabled readonly></ckeditor>
+              <textarea rows="3" class='width-100' #entrance_details='ngModel'   name="entrance_details" [(ngModel)]="course.entrance_details"  disabled readonly></textarea>
             </div>
           </div>
           <div class="form-group row">
             <label class="col-lg-2 label">Refund Policy</label>
             <div class="col-lg-10">
-              <ckeditor [config]="{ extraPlugins: 'divarea', height: '100' }" #refund_policy='ngModel'   name="refund_policy" [(ngModel)]="course.refund_policy"  disabled readonly></ckeditor>
+              <textarea rows="3" class='width-100' #refund_policy='ngModel'   name="refund_policy" [(ngModel)]="course.refund_policy"  disabled readonly></textarea>
             </div>
           </div>
           <div class="form-group row">
             <label class="col-lg-2 label">Important Dates</label>
             <div class="col-lg-10">
-              <ckeditor [config]="{ extraPlugins: 'divarea', height: '100' }"#dates='ngModel'   name="dates" [(ngModel)]="course.dates"  disabled readonly></ckeditor>
+              <textarea rows="3" class='width-100'  #dates='ngModel'   name="dates" [(ngModel)]="course.dates"   readonly></textarea>
             </div>
           </div>
           <div class=" row">
             <label class="col-lg-2 label">Course Delivery</label>
             <div class="col-lg-10">
-              <input type="text" class="form-control" #course_delivery='ngModel'   name="course_delivery" [(ngModel)]="course.course_delivery" disabled readonly id="exampleFormControlInput1" placeholder="">
+              <input type="text" class="form-control" #course_delivery='ngModel'   name="course_delivery" [(ngModel)]="course.course_delivery"  readonly id="exampleFormControlInput1" placeholder="">
             </div>
           </div>
           <br>
           <div class=" row">
             <label class="col-lg-2 label">Internship Partner</label>
             <div class="col-lg-10">
-              <input type="text" class="form-control" #internship_partner='ngModel'   name="internship_partner" [(ngModel)]="course.internship_partner" disabled readonly id="exampleFormControlInput1" placeholder="">
+              <input type="text" class="form-control" #internship_partner='ngModel'   name="internship_partner" [(ngModel)]="course.internship_partner"  readonly id="exampleFormControlInput1" placeholder="">
             </div>
           </div>
           <br>
           <div class=" row">
             <label class="col-lg-2 label">Knowledge Partner</label>
             <div class="col-lg-10">
-              <input type="text" class="form-control" #knowledge_partner='ngModel'   name="knowledge_partner" [(ngModel)]="course.knowledge_partner" disabled readonly id="exampleFormControlInput1" placeholder="">
+              <input type="text" class="form-control" #knowledge_partner='ngModel'   name="knowledge_partner" [(ngModel)]="course.knowledge_partner"  readonly id="exampleFormControlInput1" placeholder="">
             </div>
           </div>        
           <br>  
           <div class=" row">
             <label class="col-lg-2 label">Sponsour Partner</label>
             <div class="col-lg-10">
-              <input type="text" class="form-control" #sponser_partner='ngModel'   name="sponser_partner" [(ngModel)]="course.sponser_partner" disabled readonly id="exampleFormControlInput1" placeholder="">
+              <input type="text" class="form-control" #sponser_partner='ngModel'   name="sponser_partner" [(ngModel)]="course.sponser_partner"  readonly id="exampleFormControlInput1" placeholder="">
             </div>
           </div>
           <br>
@@ -124,7 +124,6 @@
             <div class="col-lg-6"></div>
             <div class="col-lg-6">
               <button type="button" class="btn btn-secondary btn-lg" (click)='closeForm()'>Close</button>
-              <!-- <a id="cancel" name="cancel" class="btn btn-secondary ">Close</a> -->
             </div>
           </div>
         </form>

@@ -20,7 +20,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
     home: true,
   },
   {
-    title: 'Users',
+    title: 'Course Registration',
     icon: 'person-outline',
     link: '/pages/users',
     home: true,

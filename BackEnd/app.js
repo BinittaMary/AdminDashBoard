@@ -66,6 +66,13 @@ app.get('/CourseCategory',function(req,res){
         });
 });
 
+app.get('/registercourseList',function(req,res){
+  CourseRegistrationdata.find().sort({ _id : -1 })
+  .then(function(cousrseRegs){
+      res.send(cousrseRegs);
+      });
+});
+
 app.post('/registercourse',function(req,res){
     res.header("Access-Control-Allow-Origin","*")
     res.header('Access-Control-Allow-Methods: GET, POST, PATCH,PUT,DELETE,OPTIONS'); 
@@ -128,7 +135,7 @@ app.post('/registercourse',function(req,res){
     res.header('Access-Control-Allow-Methods: GET, POST, PATCH,PUT,DELETE,OPTIONS');  
     console.log(` inside insert ${req.body}`)
     console.log(__dirname);
-    const destn = path.join(__dirname, '../', 'Client', 'src', 'assets', 'images');
+    const destn = path.join(__dirname, '../', 'FrontEnd', 'src', 'assets', 'images');
     console.log(destn);
     var storage =   multer.diskStorage({
         destination: function (req, file, callback) {
@@ -293,7 +300,7 @@ app.get('/testimonials',function(req,res){
 
 app.post('/insert',function(req,res){
 
-  const destn = path.join(__dirname, '../',  'Admin-Dashboard-master', 'src', 'assets', 'images');
+  const destn = path.join(__dirname, '../', 'FrontEnd', 'src', 'assets', 'images');
   console.log(destn);
   var storage =   multer.diskStorage({
       destination: function (req, file, callback) {

@@ -81,30 +81,37 @@
               </div>
             </div>
             <div class=" row">
+              <label class="col-lg-2 label">Course Image</label>
+              <div class="col-lg-10">
+                <input class="form-control form-control-sm " #course_image='ngModel' (change)="selectImage($event)"  name="course_image" [(ngModel)]="course.course_image" id="formFileSm" type="file" style="height:2.5rem">
+              </div>
+            </div>
+            <br>
+            <div class=" row">
               <label class="col-lg-2 label">Course Delivery</label>
               <div class="col-lg-10">
-                <input type="text" class="form-control" #course_delivery='ngModel'   name="course_delivery" [(ngModel)]="course.course_delivery"   id="exampleFormControlInput1" placeholder="">
+                <input class="form-control form-control-sm " #course_delivery='ngModel' (change)="selectImage($event)"  name="course_delivery" [(ngModel)]="course.course_delivery" id="formFileSm" type="file" style="height:2.5rem">
               </div>
             </div>
             <br>
             <div class=" row">
               <label class="col-lg-2 label">Internship Partner</label>
               <div class="col-lg-10">
-                <input type="text" class="form-control" #internship_partner='ngModel'   name="internship_partner" [(ngModel)]="course.internship_partner"   id="exampleFormControlInput1" placeholder="">
+                <input class="form-control form-control-sm" #internship_partner='ngModel' (change)="selectImage($event)"  name="internship_partner" [(ngModel)]="course.internship_partner" id="formFileSm" type="file" style="height:2.5rem">
               </div>
             </div>
             <br>
             <div class=" row">
               <label class="col-lg-2 label">Knowledge Partner</label>
               <div class="col-lg-10">
-                <input type="text" class="form-control" #knowledge_partner='ngModel'   name="knowledge_partner" [(ngModel)]="course.knowledge_partner"   id="exampleFormControlInput1" placeholder="">
+                <input class="form-control form-control-sm" #knowledge_partner='ngModel' (change)="selectImage($event)"  name="knowledge_partner" [(ngModel)]="course.knowledge_partner" id="formFileSm" type="file" style="height:2.5rem">
               </div>
             </div>        
             <br>  
             <div class=" row">
               <label class="col-lg-2 label">Sponsour Partner</label>
               <div class="col-lg-10">
-                <input type="text" class="form-control" #sponser_partner='ngModel'   name="sponser_partner" [(ngModel)]="course.sponser_partner"   id="exampleFormControlInput1" placeholder="">
+                <input class="form-control form-control-sm" #sponser_partner='ngModel' (change)="selectImage($event)"  name="sponser_partner" [(ngModel)]="course.sponser_partner"  id="formFileSm" type="file" style="height:2.5rem">
               </div>
             </div>
             <br>

@@ -12,6 +12,10 @@ export class CoursesService {
     return this.http.get('http://localhost:5000/CourseList')
   };
 
+  getCourseRegistrationList(){
+    return this.http.get('http://localhost:5000/registercourseList')
+  };
+
   getCourse(id:any){
     return this.http.get("http://localhost:5000/Course/"+id);
   };
