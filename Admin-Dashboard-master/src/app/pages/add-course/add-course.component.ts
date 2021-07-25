@@ -5,6 +5,7 @@ import { ActivatedRoute,Router } from '@angular/router';
 import '../ckeditor.loader';
 import 'ckeditor';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import Swal from 'sweetalert2';
 @Component({
   selector: 'ngx-add-course',
   templateUrl: './add-course.component.html',
@@ -17,7 +18,7 @@ export class AddCourseComponent implements OnInit {
     course_short_desc       : '',
     Reg_Status              : 1,
     Category                : '',
-    Rating                  : 5,
+    Rating                  : 1,
     about_course            : '',
     dates                   : '' ,
     eligibility             : '',
@@ -32,14 +33,14 @@ export class AddCourseComponent implements OnInit {
     active                  : true 
   }
   images :any= [];
+  submitted : boolean=false;
 
   constructor(public courseObj : CoursesService, private router:Router, private route: ActivatedRoute ) { }
 
   ngOnInit(): void {
+    this.submitted = false;
   }
-  alertm(){
-    // this.router.navigate(['../viewcourse'], { relativeTo: this.route });
-  }
+
   closeForm(){
     this.router.navigate(['../courses'], { relativeTo: this.route });    
   }
@@ -51,9 +52,21 @@ export class AddCourseComponent implements OnInit {
     this.course.sponser_partner = this.course.sponser_partner.replace('C:\\fakepath\\','');
     this.course.course_image = this.course.course_image.replace('C:\\fakepath\\','');
     console.log(this.course)
-    this.courseObj.newCourse(this.images, this.course);
-    // localStorage.setItem('bookAlertMsg', `The book ${this.course.title} is added`); 
-    // this.router.navigate(['../courses'], { relativeTo: this.route }); 
+    this.courseObj.newCourse(this.images, this.course).subscribe(
+      response => {
+        if (response) {
+          Swal.fire("Successfully Added", "success")
+          .then(() => {
+            this.router.navigate(['../courses'], { relativeTo: this.route });
+          })          }
+        else {
+          Swal.fire("Network Error", "Please do after sometime ", "error")
+            .then(() => {
+              this.router.navigate(['../courses'], { relativeTo: this.route });
+            })
+
+        }
+      })
   }
 
   selectImage(event : any) {

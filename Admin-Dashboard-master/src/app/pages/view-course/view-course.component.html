@@ -81,6 +81,13 @@
             </div>
           </div>
           <div class=" row">
+            <label class="col-lg-2 label">Course Image</label>
+            <div class="col-lg-10">
+              <input type="text" class="form-control" #course_image='ngModel'   name="course_image" [(ngModel)]="course.course_image"  readonly id="exampleFormControlInput1" placeholder="">
+            </div>
+          </div>
+          <br>
+          <div class=" row">
             <label class="col-lg-2 label">Course Delivery</label>
             <div class="col-lg-10">
               <input type="text" class="form-control" #course_delivery='ngModel'   name="course_delivery" [(ngModel)]="course.course_delivery"  readonly id="exampleFormControlInput1" placeholder="">
@@ -112,8 +119,7 @@
             <div class="col-lg-2"></div>
             <div class="col-lg-10" >
               <div class="form-check" readonly >
-                <input *ngIf= '(course.active)' class="form-check-input" type="checkbox" id="flexCheckDefault" checked disabled>
-                <input *ngIf= '!(course.active)' class="form-check-input" type="checkbox" id="flexCheckDefault" disabled>
+                <input  class="form-check-input" type="checkbox" id="flexCheckDefault"  name="active" [(ngModel)]="course.active" disabled>
                 <label class="form-check-label" for="flexCheckDefault">
                   Active
                 </label>
@@ -123,7 +129,7 @@
           <div class="form-group row">
             <div class="col-lg-6"></div>
             <div class="col-lg-6">
-              <button type="button" class="btn btn-secondary btn-lg" (click)='closeForm()'>Close</button>
+              <button type="button" class="btn btn-danger btn-sm" (click)='closeForm()'>Close</button>
             </div>
           </div>
         </form>

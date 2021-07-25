@@ -178,7 +178,11 @@ app.post('/registercourse',function(req,res){
         }       
         console.log(course);
         var courseItem = new Coursedata(course);
-        courseItem.save();
+        courseItem.save().then(function (data) {
+          res.send(true)
+          }).catch(function (error) {
+          res.send(false)
+      });
         });    
     });
   });
@@ -187,13 +191,15 @@ app.post('/registercourse',function(req,res){
     console.log(req.body);
     id         = req.body._id
     console.log(` inside remove ${id}`);
-    Coursedata.deleteOne({'_id' : id})
-    .then(function(course){
-        console.log('success')
-        res.send();
+    Coursedata.findByIdAndDelete({'_id' : id},
+    (err, result) => {
+        if (err) {
+            res.send(false)
+        } else {
+            res.send(true)
+        }
     });
-  
-  });
+});
 
 
   app.put('/Course/update',verifyToken,(req,res)=>{
@@ -201,42 +207,40 @@ app.post('/registercourse',function(req,res){
     res.header('Access-Control-Allow-Methods: GET, POST, PATCH,PUT,DELETE,OPTIONS');  
     console.log(` inside update ${req.body.id}`);
     id                      = req.body._id;
-    course_title            = req.body.course_title;
-    course_image            = req.body.course_image;
-    course_short_desc       = req.body.course_short_desc;
-    Reg_Status              = req.body.Reg_Status;
-    Category                = req.body.Category;
-    Rating                  = req.body.Rating;
-    about_course            = req.body.about_course;
-    dates                   = req.body.dates;
-    eligibility             = req.body.eligibility;
-    course_fee              = req.body.course_fee;
-    entrance_details        = req.body.entrance_details;
-    refund_policy           = req.body.refund_policy;
-    course_delivery         = req.body.course_delivery;
-    internship_partner      = req.body.internship_partner;
-    knowledge_partner       = req.body.knowledge_partner;
-    sponser_partner         = req.body.sponser_partner;
-    active                  = req.body.active;  
-    Authordata.findByIdAndUpdate({"_id":id},
-                                {$set:{"authorname":authorname,
-                                "nationality":nationality,
-                                "works":works,
-                                "career":career,
-                                "image":image}})
-   .then(function(){
-       res.send();
-   })
+    let item = {
+    course_title            : req.body.course_title,
+    course_image            : req.body.course_image,
+    course_short_desc       : req.body.course_short_desc,
+    Reg_Status              : req.body.Reg_Status,
+    Category                : req.body.Category,
+    Rating                  : req.body.Rating,
+    about_course            : req.body.about_course,
+    dates                   : req.body.dates,
+    eligibility             : req.body.eligibility,
+    course_fee              : req.body.course_fee,
+    entrance_details        : req.body.entrance_details,
+    refund_policy           : req.body.refund_policy,
+    active                  : req.body.active
+    } 
+    let updateCourse= { $set: item };
+    Coursedata.findByIdAndUpdate({"_id":id}, updateCourse)
+      .then((respond) => {
+        if (respond) {
+            console.log('mongoDb updated successfully for Course')
+            res.send(true)
+        }
+        else {
+            console.log('mongoDb update error', error)
+            res.send(false)
+        }
+      });
+   });
 
-  });
-
-app.put('/author/updateWithFile',verifyToken,(req,res)=>{
-
-
+app.put('/Course/updateWithFile',verifyToken,(req,res)=>{
    res.header("Access-Control-Allow-Origin","*")
    res.header('Access-Control-Allow-Methods: GET, POST, PATCH,PUT,DELETE,OPTIONS');  
-   console.log(` inside updateWithFile ${req.body}`)
-   const destn = path.join(__dirname, '../',  'Client', 'src', 'assets', 'images');
+   console.log(` inside updateWithFile ${req.body.course_title}`)
+   const destn = path.join(__dirname, '../', 'FrontEnd', 'src', 'assets', 'images');
    console.log(destn);
    var storage =   multer.diskStorage({
        destination: function (req, file, callback) {
@@ -246,35 +250,51 @@ app.put('/author/updateWithFile',verifyToken,(req,res)=>{
          cb(null, file.originalname);
      }
      });
-   var upload = multer({ storage : storage}).single('file');
+   var upload = multer({ storage : storage}).array('files',10);
    upload(req,res,function(err) {
  
        if(err) {
            console.log("Error uploading file.");
        }
-       console.log("File is uploaded");
-       console.log(`the title is ${req.body.title}`);
-   console.log(` inside update with image ${req.body.title}`);
-   id          = req.body._id,
-   authorname  = req.body.authorname,
-   nationality = req.body.nationality,
-   works       = req.body.works,
-   career      = req.body.career,
-   image       = req.body.image
-   Authordata.findByIdAndUpdate({"_id":id},
-                               {$set:{"authorname":authorname,
-                               "nationality":nationality,
-                               "works":works,
-                               "career":career,
-                               "image":image}})
-  .then(function(){
-      res.send();
-  })
- });
- });
+   console.log("File is uploaded");
+   console.log(` inside update with image ${req.body.course_title}`);
+   id          = req.body._id;
+   let item    = 
+   {
+    course_title            : req.body.course_title,
+    course_image            : req.body.course_image,
+    course_short_desc       : req.body.course_short_desc,
+    Reg_Status              : req.body.Reg_Status,
+    Category                : req.body.Category,
+    Rating                  : req.body.Rating,
+    about_course            : req.body.about_course,
+    dates                   : req.body.dates,
+    eligibility             : req.body.eligibility,
+    course_fee              : req.body.course_fee,
+    entrance_details        : req.body.entrance_details,
+    refund_policy           : req.body.refund_policy,
+    active                  : req.body.active,
+    sponser_partner         : req.body.sponser_partner,
+    knowledge_partner       : req.body.knowledge_partner,
+    internship_partner      : req.body.internship_partner,
+    course_delivery         : req.body.course_delivery
+    } 
+    let updateCourse= { $set: item };
+    Coursedata.findByIdAndUpdate({"_id":id}, updateCourse)
+      .then((respond) => {
+        if (respond) {
+            console.log('mongoDb updated successfully for Course')
+            res.send(true)
+        }
+        else {
+            console.log('mongoDb update error', error)
+            res.send(false)
+        }
+      });
+   });
+  });
 
- app.post('/insert',function(req,res){
-   
+ app.post('/insert',function(req,res){   
   console.log(req.body);
  
   var testimonial = {       
