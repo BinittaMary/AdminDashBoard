@@ -34,4 +34,9 @@ export class StaffService {
     return this.http.post("http://localhost:5000/insert",formData)
     .subscribe(data =>{console.log(data)})
   }
+
+  updateStaffIndex(staff:any){
+    return this.http.put("http://localhost:5000/Course/updateStaffIndex/",staff);
+  };
+
 }

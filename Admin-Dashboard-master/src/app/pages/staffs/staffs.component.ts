@@ -33,4 +33,22 @@ export class StaffsComponent implements OnInit {
   onDrop(event: CdkDragDrop<string[]>) {
     moveItemInArray(this.staffs, event.previousIndex, event.currentIndex);
   }
+
+  saveStaffIndex(){
+    console.log(this.staffs);
+    for(let i= 0; i<this.staffs.length; i++){
+    this.staffs[i].index=i;  
+    this.staffService.updateStaffIndex(this.staffs[i])
+    .subscribe((course)=>{
+      // console.log(course);
+    });
+  }
+ }
+
+ resetStaffIndex(){
+  let currentUrl = this.router.url;
+  this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+      this.router.navigate([currentUrl]);
+  });
+ }
 }

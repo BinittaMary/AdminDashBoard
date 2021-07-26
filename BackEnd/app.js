@@ -129,6 +129,22 @@ app.post('/registercourse',function(req,res){
 
   });
 
+  app.put('/Course/updateStaffIndex',verifyToken,(req,res)=>{
+    res.header("Access-Control-Allow-Origin","*")
+    res.header('Access-Control-Allow-Methods: GET, POST, PATCH,PUT,DELETE,OPTIONS');     
+    
+    id         = req.body._id;
+    index      = req.body.index;
+    name       = req.body.name;
+    console.log(`update of ${name}  with value ${index}`);
+    Coursedata.findByIdAndUpdate({"_id":id},
+                                {$set:{"index":index}})
+   .then(function(){
+       res.send();
+   })
+
+  });
+
   app.post('/Course/insert',verifyToken,function(req,res){
     var indx;  
     res.header("Access-Control-Allow-Origin","*")
@@ -353,9 +369,8 @@ app.post('/insert',function(req,res){
 });
 
 //getting staff data
-app.get('/staffs',function(req,res){
-  
-  StaffData.find()
+app.get('/staffs',function(req,res){  
+  StaffData.find().sort({ index: 1 })
               .then(function(staffs){
                   res.send(staffs);
               });
