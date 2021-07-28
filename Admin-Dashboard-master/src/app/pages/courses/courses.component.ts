@@ -17,6 +17,10 @@ import { NbSortDirection, NbSortRequest, NbTreeGridDataSource, NbTreeGridDataSou
   styleUrls: ['./courses.component.scss']
 })
 export class CoursesComponent implements OnInit {
+  public searchCourseTitle: any = '';
+  public searchCourseCategory : any ='';
+  srchTitle ='';
+  srchCategory ='';
   Courses : any;
   CoursesActual: any;
   constructor(private windowService: NbWindowService, public courseObj : CoursesService, private router:Router, private route: ActivatedRoute) { }
@@ -33,6 +37,11 @@ export class CoursesComponent implements OnInit {
 
   onDrop(event: CdkDragDrop<string[]>) {
     moveItemInArray(this.Courses, event.previousIndex, event.currentIndex);
+  }
+
+  resetSearch(){
+    this.srchTitle='';
+    this.srchCategory='';
   }
 
   viewCourse(course : any) {

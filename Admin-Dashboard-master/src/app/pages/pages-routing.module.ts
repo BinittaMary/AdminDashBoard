@@ -5,12 +5,12 @@ import { PagesComponent } from './pages.component';
 import { CoursesComponent } from './courses/courses.component';
 import { StaffsComponent } from './staffs/staffs.component';
 import { TestimonialsComponent } from './testimonials/testimonials.component';
-import { UsersComponent } from './users/users.component';
 import { ViewCourseComponent } from './view-course/view-course.component';
 import { AddCourseComponent } from './add-course/add-course.component';
 import { EditCourseComponent } from './edit-course/edit-course.component';
 import { StaffFormComponent } from './staff-form/staff-form.component';
 import { TestimonialformComponent } from './testimonialform/testimonialform.component';
+import { UserRegistrationComponent } from './user-registration/user-registration.component';
 
 const routes: Routes = [{
   path: '',
@@ -49,8 +49,8 @@ const routes: Routes = [{
       component:TestimonialsComponent,
     },
     {
-      path: 'users',
-      component: UsersComponent,
+      path: 'CourseRegistration',
+      component:UserRegistrationComponent,
     },
   ],
 }];

@@ -15,13 +15,25 @@
             <nb-card-body>
                 <nb-list>
                     <nb-list-item>
+                        <h6 style ='width:16rem'><ion-icon name="search-outline"></ion-icon></h6>
+                        <span style ='width:36rem'><input type="text"  class="search-input" placeholder="Search by Title" [(ngModel)]="srchTitle" id="listSearch1"></span>
+                        <span style ='width:22rem'><input type="text"  class="search-input" placeholder="Search by Category" [(ngModel)]="srchCategory" id="listSearch2"></span>
+                        <div>
+                        <a (click)="resetSearch()">
+                            <ion-icon name="refresh-outline"></ion-icon>
+                        </a>   
+                        </div>
+                    </nb-list-item>    
+                </nb-list>
+                <nb-list>
+                    <nb-list-item>
                         <h6 style ='width:16rem'>#</h6>
                         <h6 style ='width:36rem'>Title</h6> 
                         <h6 style ='width:5rem'>Category</h6> 
                     </nb-list-item>    
                 </nb-list>
                 <nb-list cdkDropList (cdkDropListDropped)="onDrop($event)">
-                    <nb-list-item class="anchor" *ngFor="let Course of Courses; let i=index; " cdkDrag>
+                    <nb-list-item class="anchor" *ngFor="let Course of Courses | searchCourseTitle: srchTitle | searchCourseCategory : srchCategory; let i=index; " cdkDrag>
                         <h7 style ='width:5rem'>{{i+1}}</h7>
                         <h7 style ='width:25rem'>{{Course.course_title}}</h7>
                         <h7 style ='width:5rem'>{{Course.Category}}</h7> 
